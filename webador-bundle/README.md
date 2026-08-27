@@ -62,11 +62,37 @@ the `<script>...</script>` block at the very end of `2-body-embed.html` into
 **Settings > Advanced > Add custom HTML code**, placed at **Body - end**, instead of
 leaving it inside the embed element.
 
-## The contact form doesn't send anywhere yet
+## Step 4: Connect the contact form to email (website@cohesiveit.co.nz)
 
-The form has a working UI (validation, a "message sent" confirmation) but isn't wired
-to actually deliver email yet, there's no email service connected. The Lowburn
-Terraces project uses EmailJS for this; the same approach would work here once you
-have (or want) an EmailJS account, or Webador may have its own built-in form/email
-handling that could replace this form entirely, worth checking before wiring up a
-third-party service.
+The form is wired to send via [EmailJS](https://www.emailjs.com) (the same service the
+Lowburn Terraces site uses), but it needs three values from a real EmailJS account
+before it'll actually deliver anything, right now `2-body-embed.html` has placeholder
+text in their place. I can't create this account myself, connecting it to your inbox
+needs you to log into it, so this part needs you:
+
+1. Go to [emailjs.com](https://www.emailjs.com) and sign up (free tier covers 200
+   emails/month, plenty for a contact form).
+2. **Add an Email Service**: connect `website@cohesiveit.co.nz` (Gmail, Outlook, or
+   any SMTP provider all work). This is what EmailJS sends *from* and *through*.
+   Note the **Service ID** it gives you.
+3. **Create an Email Template** with a destination address of
+   `website@cohesiveit.co.nz`, and in the template body use these three variables
+   (they match the form's field names exactly, don't rename them):
+   `{{from_name}}`, `{{from_email}}`, `{{message}}`.
+   Note the **Template ID**.
+4. Go to **Account > General** in EmailJS and copy your **Public Key**.
+5. In `2-body-embed.html` (or directly in `index.html` if you're working from the
+   full site), find and replace all three placeholders:
+   - `REPLACE_WITH_EMAILJS_PUBLIC_KEY` → your Public Key
+   - `REPLACE_WITH_EMAILJS_SERVICE_ID` → your Service ID
+   - `REPLACE_WITH_EMAILJS_TEMPLATE_ID` → your Template ID
+6. Re-paste the updated code into the Webador embed element and republish.
+
+Until these are filled in, the form still works from a visitor's point of view
+(validation, a loading state), but submitting it will show "Sorry, something went
+wrong sending your message. Please email website@cohesiveit.co.nz directly." instead
+of succeeding, tested and confirmed that's the actual behavior with the placeholders
+still in place, not a guess.
+
+If you'd rather send me the three values directly, I can drop them in myself and
+regenerate this bundle.

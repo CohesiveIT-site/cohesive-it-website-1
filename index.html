@@ -12,6 +12,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
 
 <script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
   tailwind.config = {
     theme: {
@@ -461,7 +462,7 @@
         <button type="submit" class="w-full sm:w-auto px-10 bg-paper text-forest text-sm font-medium py-3.5 rounded-full hover:bg-mist active:scale-[0.98] transition-[background-color,transform] duration-300">
           Send Message
         </button>
-        <p id="form-note" class="text-paper/50 text-xs mt-4 leading-relaxed"><!-- TODO: wire to email delivery (EmailJS/backend) --></p>
+        <p id="form-note" class="text-paper/50 text-xs mt-4 leading-relaxed"><!-- TODO: replace the EmailJS placeholder IDs below with real ones from an EmailJS account connected to website@cohesiveit.co.nz --></p>
       </div>
     </form>
   </div>
@@ -515,13 +516,31 @@
     menuToggle.setAttribute('aria-expanded', 'false');
   }));
 
-  // contact form (UI only until real email delivery is wired up - see TODO comment near the form)
+  // form submit via EmailJS - see the TODO comment near the form for setup steps
+  emailjs.init({ publicKey: 'REPLACE_WITH_EMAILJS_PUBLIC_KEY' });
+
   const enquiryForm = document.getElementById('enquiry-form');
   const formNote = document.getElementById('form-note');
+  const submitBtn = enquiryForm.querySelector('button[type="submit"]');
+
   enquiryForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    formNote.textContent = 'Thanks, your message has been sent. Craig will get back to you directly.';
-    enquiryForm.reset();
+    submitBtn.disabled = true;
+    submitBtn.classList.add('opacity-50');
+    formNote.textContent = 'Sending...';
+
+    emailjs.sendForm('REPLACE_WITH_EMAILJS_SERVICE_ID', 'REPLACE_WITH_EMAILJS_TEMPLATE_ID', enquiryForm)
+      .then(() => {
+        formNote.textContent = 'Thanks, your message has been sent. Craig will get back to you directly.';
+        enquiryForm.reset();
+      })
+      .catch(() => {
+        formNote.textContent = 'Sorry, something went wrong sending your message. Please email website@cohesiveit.co.nz directly.';
+      })
+      .finally(() => {
+        submitBtn.disabled = false;
+        submitBtn.classList.remove('opacity-50');
+      });
   });
 </script>
 
