@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cohesive IT - Managed IT &amp; Cybersecurity, Central Otago</title>
+<meta name="description" content="Cohesive IT is your cheaper alternative to an in-house IT expert. One single point of contact for cybersecurity, backups, Microsoft 365 and everything your business runs on.">
+<link rel="icon" type="image/png" href="assets/cohesive-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          ink: '#0F2018',
+          forest: '#1B3A2A',
+          moss: '#3F5A4A',
+          sage: '#7FA98D',
+          mist: '#E9F5EE',
+          paper: '#FAF8F3',
+          ember: '#A6432F',
+        },
+        fontFamily: {
+          display: ['"Space Grotesk"', 'sans-serif'],
+          sans: ['"IBM Plex Sans"', 'sans-serif'],
+          mono: ['"IBM Plex Mono"', 'monospace'],
+        },
+      },
+    },
+  };
+</script>
+
+<style>
+  html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+  body { font-family: 'IBM Plex Sans', sans-serif; }
+  h1, h2, h3, .font-display { font-family: 'Space Grotesk', sans-serif; }
+
+  ::selection { background: #1B3A2A; color: #FAF8F3; }
+
+  :focus-visible {
+    outline: 2px solid #7FA98D;
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+  }
+
+  .nav-link { position: relative; }
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0; bottom: -6px;
+    width: 0; height: 2px;
+    background: currentColor;
+    border-radius: 1px;
+    transition: width .35s cubic-bezier(.22,1,.36,1);
+  }
+  .nav-link:hover::after, .nav-link:focus-visible::after { width: 100%; }
+  .nav-link:active { opacity: .6; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-in { opacity: 0; animation: fadeUp .9s cubic-bezier(.22,1,.36,1) forwards; }
+  .hero-in.delay-1 { animation-delay: .12s; }
+  .hero-in.delay-2 { animation-delay: .24s; }
+  .hero-in.delay-3 { animation-delay: .36s; }
+
+  @keyframes nodePulse {
+    0%, 100% { opacity: .55; r: 5; }
+    50% { opacity: 1; r: 7; }
+  }
+  .node-pulse { animation: nodePulse 3.2s ease-in-out infinite; transform-origin: center; }
+  .node-pulse.d1 { animation-delay: .4s; }
+  .node-pulse.d2 { animation-delay: 1.1s; }
+  .node-pulse.d3 { animation-delay: 1.8s; }
+
+  @keyframes lineDraw {
+    from { stroke-dashoffset: var(--len); }
+    to { stroke-dashoffset: 0; }
+  }
+  .line-draw { stroke-dasharray: var(--len); stroke-dashoffset: var(--len); animation: lineDraw 1.6s cubic-bezier(.22,1,.36,1) forwards; animation-delay: .5s; }
+
+  .input-line {
+    background: transparent;
+    border: none;
+    border-bottom: 1.5px solid rgba(15,32,24,0.18);
+    transition: border-color .3s ease;
+  }
+  .input-line:focus { border-color: #1B3A2A; }
+</style>
+</head>
+
+<body class="bg-paper text-ink antialiased">
+
+<!-- NAV -->
+<header id="site-nav" class="fixed inset-x-0 top-0 z-50 transition-[background-color,box-shadow] duration-500">
+  <div class="max-w-7xl mx-auto px-6 md:px-10 flex items-center justify-between h-20 md:h-22">
+    <a href="#top" class="flex items-center gap-3">
+      <img src="assets/cohesive-icon.png" alt="" class="w-8 h-8 md:w-9 md:h-9" aria-hidden="true">
+      <span class="font-display font-semibold text-lg tracking-tight text-ink">Cohesive IT</span>
+    </a>
+
+    <nav class="hidden md:flex items-center gap-9 text-[13px] font-medium text-ink/80">
+      <a href="#services" class="nav-link">Services</a>
+      <a href="#approach" class="nav-link">Approach</a>
+      <a href="#who-we-help" class="nav-link">Who We Help</a>
+      <a href="#about" class="nav-link">About</a>
+      <a href="#contact" class="nav-link">Contact</a>
+    </nav>
+
+    <a href="#contact" class="hidden md:inline-flex items-center gap-2 bg-forest text-paper text-[13px] font-medium px-5 py-2.5 rounded-full hover:bg-ink active:scale-[0.97] transition-[background-color,transform] duration-300">
+      Book a consultation
+    </a>
+
+    <button id="menu-toggle" aria-label="Open menu" aria-expanded="false" class="md:hidden w-8 h-8 flex flex-col justify-center gap-[5px] items-end text-ink">
+      <span class="block w-7 h-px bg-current transition-transform duration-300"></span>
+      <span class="block w-7 h-px bg-current transition-opacity duration-300"></span>
+      <span class="block w-5 h-px bg-current transition-transform duration-300"></span>
+    </button>
+  </div>
+
+  <div id="mobile-menu" class="hidden md:hidden bg-forest text-paper px-6 pb-8 pt-2">
+    <div class="flex flex-col gap-5 text-[15px] font-medium">
+      <a href="#services" class="py-1">Services</a>
+      <a href="#approach" class="py-1">Approach</a>
+      <a href="#who-we-help" class="py-1">Who We Help</a>
+      <a href="#about" class="py-1">About</a>
+      <a href="#contact" class="py-1">Contact</a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section id="top" class="relative overflow-hidden bg-paper pt-36 pb-20 md:pt-44 md:pb-28 px-6">
+  <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+    <div>
+      <p class="hero-in font-mono text-[11px] uppercase tracking-[0.2em] text-moss mb-6">
+        Managed IT &amp; Cybersecurity &middot; Central Otago, NZ
+      </p>
+      <h1 class="hero-in delay-1 font-display font-semibold text-4xl sm:text-5xl md:text-[3.4rem] leading-[1.08] tracking-tight text-ink">
+        Your cheaper alternative to an in-house IT expert.
+      </h1>
+      <p class="hero-in delay-2 mt-7 text-ink/70 text-base md:text-lg leading-relaxed max-w-lg">
+        Cohesive IT becomes the single point of contact for everything your business runs
+        on: security, backups, Microsoft 365, and the systems in between. No endless
+        meetings. No help-desk queue. Just seamless operation, and someone who picks up
+        the phone.
+      </p>
+      <div class="hero-in delay-3 mt-10 flex flex-wrap items-center gap-4">
+        <a href="#contact" class="inline-flex items-center gap-2 bg-forest text-paper text-sm font-medium px-7 py-3.5 rounded-full hover:bg-ink active:scale-[0.97] transition-[background-color,transform] duration-300">
+          Book a consultation
+        </a>
+        <a href="#services" class="inline-flex items-center gap-2 text-ink text-sm font-medium px-7 py-3.5 rounded-full border border-ink/15 hover:border-ink/40 hover:bg-ink/[0.03] active:scale-[0.97] transition-[background-color,border-color,transform] duration-300">
+          See what's included
+        </a>
+      </div>
+    </div>
+
+    <div class="relative h-[320px] sm:h-[400px] lg:h-[460px]" aria-hidden="true">
+      <svg viewBox="0 0 560 460" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+        <!-- scattered, disconnected nodes (left) -->
+        <g stroke="#7FA98D" stroke-width="1" opacity="0.5">
+          <line class="line-draw" style="--len:120" x1="40" y1="70" x2="130" y2="130"/>
+          <line class="line-draw" style="--len:95" x1="70" y1="220" x2="130" y2="130"/>
+          <line class="line-draw" style="--len:110" x1="20" y1="330" x2="70" y2="220"/>
+          <line class="line-draw" style="--len:130" x1="150" y1="360" x2="70" y2="220"/>
+        </g>
+        <circle cx="40" cy="70" r="4" fill="#3F5A4A" opacity="0.6"/>
+        <circle cx="130" cy="130" r="5" fill="#1B3A2A" opacity="0.7"/>
+        <circle cx="70" cy="220" r="4" fill="#3F5A4A" opacity="0.6"/>
+        <circle cx="20" cy="330" r="4" fill="#7FA98D" opacity="0.6"/>
+        <circle cx="150" cy="360" r="4" fill="#3F5A4A" opacity="0.6"/>
+
+        <!-- connecting corridor -->
+        <g stroke="#7FA98D" stroke-width="1.2" opacity="0.55">
+          <line class="line-draw" style="--len:150" x1="130" y1="130" x2="270" y2="180"/>
+          <line class="line-draw" style="--len:140" x1="150" y1="360" x2="290" y2="300"/>
+        </g>
+
+        <!-- unified hex/grid cluster (right) -->
+        <g stroke="#1B3A2A" stroke-width="1.2" opacity="0.4">
+          <line x1="270" y1="180" x2="360" y2="140"/>
+          <line x1="270" y1="180" x2="360" y2="220"/>
+          <line x1="360" y1="140" x2="450" y2="180"/>
+          <line x1="360" y1="220" x2="450" y2="180"/>
+          <line x1="360" y1="220" x2="360" y2="300"/>
+          <line x1="290" y1="300" x2="360" y2="300"/>
+          <line x1="360" y1="300" x2="450" y2="260"/>
+          <line x1="450" y1="180" x2="450" y2="260"/>
+          <line x1="450" y1="260" x2="520" y2="220"/>
+          <line x1="450" y1="180" x2="520" y2="220"/>
+        </g>
+        <circle class="node-pulse d1" cx="270" cy="180" r="5" fill="#1B3A2A"/>
+        <circle cx="360" cy="140" r="5" fill="#1B3A2A" opacity="0.85"/>
+        <circle class="node-pulse d2" cx="360" cy="220" r="6" fill="#1B3A2A"/>
+        <circle cx="290" cy="300" r="4" fill="#3F5A4A" opacity="0.8"/>
+        <circle cx="360" cy="300" r="5" fill="#1B3A2A" opacity="0.85"/>
+        <circle class="node-pulse d3" cx="450" cy="180" r="6" fill="#1B3A2A"/>
+        <circle cx="450" cy="260" r="5" fill="#1B3A2A" opacity="0.85"/>
+        <circle cx="520" cy="220" r="5" fill="#3F5A4A" opacity="0.8"/>
+
+        <!-- soft field of faint background dots -->
+        <g fill="#7FA98D" opacity="0.25">
+          <circle cx="480" cy="60" r="3"/>
+          <circle cx="510" cy="380" r="3"/>
+          <circle cx="200" cy="60" r="3"/>
+          <circle cx="100" cy="420" r="3"/>
+          <circle cx="400" cy="400" r="3"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST STRIP -->
+<div class="bg-forest text-paper/90">
+  <div class="max-w-7xl mx-auto px-6 py-5 flex flex-wrap items-center justify-center gap-x-10 gap-y-3 text-center">
+    <span class="text-[12px] md:text-[13px] uppercase tracking-[0.12em] font-medium">Microsoft Partner</span>
+    <span class="text-[12px] md:text-[13px] uppercase tracking-[0.12em] font-medium">Veeam Partner</span>
+    <span class="text-[12px] md:text-[13px] uppercase tracking-[0.12em] font-medium">NIST CSF &amp; Essential Eight Aligned</span>
+    <span class="text-[12px] md:text-[13px] uppercase tracking-[0.12em] font-medium">Based in Central Otago, NZ</span>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="services" class="py-24 md:py-32 px-6">
+  <div class="max-w-2xl mx-auto text-center mb-16 md:mb-20">
+    <p class="font-mono text-[11px] uppercase tracking-[0.2em] text-moss mb-5">What We Manage</p>
+    <h2 class="font-display font-semibold text-3xl md:text-5xl leading-tight tracking-tight">
+      Everything your business runs on, looked after in one place.
+    </h2>
+  </div>
+
+  <div class="max-w-6xl mx-auto grid sm:grid-cols-2 gap-6 md:gap-8">
+    <article class="group rounded-3xl bg-mist p-8 md:p-10 shadow-[0_20px_45px_-30px_rgba(15,32,24,0.35)] hover:shadow-[0_28px_60px_-25px_rgba(15,32,24,0.4)] transition-shadow duration-500">
+      <div class="w-12 h-12 rounded-2xl bg-forest flex items-center justify-center mb-6 transition-transform duration-500 group-hover:-translate-y-1">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L4 5V11C4 16 7 19.5 12 21C17 19.5 20 16 20 11V5L12 2Z" stroke="#FAF8F3" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 12L11 14L15.5 9.5" stroke="#FAF8F3" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <h3 class="font-display font-semibold text-xl mb-3">Proactive Cybersecurity</h3>
+      <p class="text-ink/65 text-sm leading-relaxed">
+        Multi-layered defence across prevention, detection, and response, built on the
+        NIST Cybersecurity Framework and the Essential Eight.
+      </p>
+    </article>
+
+    <article class="group rounded-3xl bg-mist p-8 md:p-10 shadow-[0_20px_45px_-30px_rgba(15,32,24,0.35)] hover:shadow-[0_28px_60px_-25px_rgba(15,32,24,0.4)] transition-shadow duration-500">
+      <div class="w-12 h-12 rounded-2xl bg-forest flex items-center justify-center mb-6 transition-transform duration-500 group-hover:-translate-y-1">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="4" width="16" height="10" rx="1.5" stroke="#FAF8F3" stroke-width="1.6"/><path d="M9 18H15M12 14V18" stroke="#FAF8F3" stroke-width="1.6" stroke-linecap="round"/><circle cx="8" cy="9" r="1" fill="#FAF8F3"/></svg>
+      </div>
+      <h3 class="font-display font-semibold text-xl mb-3">Managed IT Maintenance</h3>
+      <p class="text-ink/65 text-sm leading-relaxed">
+        Device management, automated patching, and continuous monitoring that keeps
+        systems current and downtime rare.
+      </p>
+    </article>
+
+    <article class="group rounded-3xl bg-mist p-8 md:p-10 shadow-[0_20px_45px_-30px_rgba(15,32,24,0.35)] hover:shadow-[0_28px_60px_-25px_rgba(15,32,24,0.4)] transition-shadow duration-500">
+      <div class="w-12 h-12 rounded-2xl bg-forest flex items-center justify-center mb-6 transition-transform duration-500 group-hover:-translate-y-1">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><ellipse cx="12" cy="6" rx="8" ry="3" stroke="#FAF8F3" stroke-width="1.6"/><path d="M4 6V12C4 13.66 7.58 15 12 15C16.42 15 20 13.66 20 12V6" stroke="#FAF8F3" stroke-width="1.6"/><path d="M4 12V18C4 19.66 7.58 21 12 21C16.42 21 20 19.66 20 18V12" stroke="#FAF8F3" stroke-width="1.6"/></svg>
+      </div>
+      <h3 class="font-display font-semibold text-xl mb-3">Veeam-Powered Backups</h3>
+      <p class="text-ink/65 text-sm leading-relaxed">
+        Automated, secure backup and fast recovery for both on-prem and cloud systems.
+        Always protected, always recoverable, always under control.
+      </p>
+    </article>
+
+    <article class="group rounded-3xl bg-mist p-8 md:p-10 shadow-[0_20px_45px_-30px_rgba(15,32,24,0.35)] hover:shadow-[0_28px_60px_-25px_rgba(15,32,24,0.4)] transition-shadow duration-500">
+      <div class="w-12 h-12 rounded-2xl bg-forest flex items-center justify-center mb-6 transition-transform duration-500 group-hover:-translate-y-1">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 17H6C3.79 17 2 15.21 2 13C2 10.97 3.51 9.29 5.47 9.03C5.86 6.19 8.29 4 11.25 4C14.35 4 16.87 6.4 17.05 9.43C19.29 9.71 21 11.62 21 13.93C21 16.45 18.95 18.5 16.43 18.5H7" stroke="#FAF8F3" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <h3 class="font-display font-semibold text-xl mb-3">Microsoft 365 &amp; Cloud</h3>
+      <p class="text-ink/65 text-sm leading-relaxed">
+        Secure collaboration and workplace productivity, designed and supported around
+        how your team actually works.
+      </p>
+    </article>
+  </div>
+</section>
+
+<!-- APPROACH -->
+<section id="approach" class="bg-forest text-paper py-24 md:py-32 px-6">
+  <div class="max-w-2xl mx-auto text-center mb-16 md:mb-20">
+    <p class="font-mono text-[11px] uppercase tracking-[0.2em] text-sage mb-5">How We Work</p>
+    <h2 class="font-display font-semibold text-3xl md:text-5xl leading-tight tracking-tight">
+      Prevent. Detect. Respond.
+    </h2>
+    <p class="mt-6 text-paper/70 text-sm md:text-base leading-relaxed">
+      Three pillars, guided by the NIST Cybersecurity Framework and the Essential Eight.
+    </p>
+  </div>
+
+  <div class="max-w-5xl mx-auto grid md:grid-cols-3 gap-8 md:gap-6 relative">
+    <div class="hidden md:block absolute top-8 left-[16.5%] right-[16.5%] h-px bg-paper/15"></div>
+
+    <div class="relative">
+      <div class="w-14 h-14 rounded-full bg-paper text-forest flex items-center justify-center font-display font-semibold text-lg mb-6 relative z-10">01</div>
+      <h3 class="font-display font-semibold text-xl mb-3">Prevent</h3>
+      <p class="text-paper/70 text-sm leading-relaxed">
+        Multi-layered defences integrating people, process, and technology to stop
+        threats before they start.
+      </p>
+    </div>
+    <div class="relative">
+      <div class="w-14 h-14 rounded-full bg-paper text-forest flex items-center justify-center font-display font-semibold text-lg mb-6 relative z-10">02</div>
+      <h3 class="font-display font-semibold text-xl mb-3">Detect</h3>
+      <p class="text-paper/70 text-sm leading-relaxed">
+        Proactive, continuous monitoring that identifies risks early, before they
+        disrupt your business.
+      </p>
+    </div>
+    <div class="relative">
+      <div class="w-14 h-14 rounded-full bg-paper text-forest flex items-center justify-center font-display font-semibold text-lg mb-6 relative z-10">03</div>
+      <h3 class="font-display font-semibold text-xl mb-3">Respond</h3>
+      <p class="text-paper/70 text-sm leading-relaxed">
+        Resilient, rapid response that keeps your data safe and your operations
+        seamless.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- WHO WE HELP -->
+<section id="who-we-help" class="py-24 md:py-32 px-6">
+  <div class="max-w-2xl mx-auto text-center mb-16 md:mb-20">
+    <p class="font-mono text-[11px] uppercase tracking-[0.2em] text-moss mb-5">Who We Help</p>
+    <h2 class="font-display font-semibold text-3xl md:text-5xl leading-tight tracking-tight">
+      Still running on systems that don't talk to each other?
+    </h2>
+    <p class="mt-6 text-ink/70 text-sm md:text-base leading-relaxed">
+      Most small and medium businesses reach a point where the ad hoc approach, one
+      old server here, a laptop someone half-manages there, backups nobody's
+      checked in months, stops being enough. The usual fix is hiring an in-house IT
+      or operations manager. There's a cheaper, simpler option.
+    </p>
+  </div>
+
+  <div class="max-w-4xl mx-auto grid sm:grid-cols-2 gap-6 md:gap-8">
+    <div class="rounded-3xl border border-ink/10 p-8 md:p-9">
+      <p class="font-mono text-[11px] uppercase tracking-[0.15em] text-ink/40 mb-4">Hiring In-House</p>
+      <ul class="space-y-3 text-sm text-ink/65 leading-relaxed">
+        <li class="flex gap-3"><span class="text-ink/30 mt-0.5">&times;</span>A full-time salary, whether or not there's a full day of IT work</li>
+        <li class="flex gap-3"><span class="text-ink/30 mt-0.5">&times;</span>One person's knowledge, one point of failure when they're sick or leave</li>
+        <li class="flex gap-3"><span class="text-ink/30 mt-0.5">&times;</span>Recruitment risk, and no guarantee of the right specialist skills</li>
+        <li class="flex gap-3"><span class="text-ink/30 mt-0.5">&times;</span>Security decisions resting on one person's up-to-date knowledge</li>
+      </ul>
+    </div>
+    <div class="rounded-3xl bg-forest text-paper p-8 md:p-9 shadow-[0_25px_55px_-25px_rgba(15,32,24,0.5)]">
+      <p class="font-mono text-[11px] uppercase tracking-[0.15em] text-sage mb-4">Partnering With Cohesive IT</p>
+      <ul class="space-y-3 text-sm text-paper/80 leading-relaxed">
+        <li class="flex gap-3"><span class="text-sage mt-0.5">&#10003;</span>A fixed monthly service fee, scoped to what your business actually needs</li>
+        <li class="flex gap-3"><span class="text-sage mt-0.5">&#10003;</span>One accountable point of contact, backed by real specialist expertise</li>
+        <li class="flex gap-3"><span class="text-sage mt-0.5">&#10003;</span>No recruitment, no onboarding, no single point of failure</li>
+        <li class="flex gap-3"><span class="text-sage mt-0.5">&#10003;</span>A proactive, security-first standard applied from day one</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT / MEET CRAIG -->
+<section id="about" class="bg-mist py-24 md:py-32 px-6">
+  <div class="max-w-5xl mx-auto grid md:grid-cols-[minmax(0,280px)_1fr] gap-12 md:gap-16 items-start">
+    <div class="mx-auto md:mx-0 w-56 md:w-full max-w-[280px]">
+      <div class="relative rounded-3xl overflow-hidden shadow-[0_25px_55px_-25px_rgba(15,32,24,0.45)]">
+        <img src="assets/craig-hero.jpg" alt="Craig Blair, Cohesive IT's single point of contact" class="w-full h-auto object-cover">
+        <div class="absolute inset-0 bg-gradient-to-t from-forest/50 via-transparent to-transparent"></div>
+        <div class="absolute inset-0 bg-forest/10 mix-blend-multiply pointer-events-none"></div>
+      </div>
+    </div>
+
+    <div>
+      <p class="font-mono text-[11px] uppercase tracking-[0.2em] text-moss mb-5">Who You'll Actually Talk To</p>
+      <h2 class="font-display font-semibold text-3xl md:text-5xl leading-tight tracking-tight mb-8">
+        One person. One number.<br class="hidden sm:block"> One point of accountability.
+      </h2>
+      <blockquote class="text-ink/80 text-base md:text-lg leading-relaxed italic border-l-2 border-forest pl-6 mb-8">
+        "I'm Craig Blair, an IT professional with more than 21 years of experience
+        designing, implementing, and supporting technology solutions for businesses.
+        My expertise spans Microsoft 365, Azure, Windows Server, VMware, networking,
+        cybersecurity, backup and disaster recovery, and managed IT services. I enjoy
+        working closely with clients to understand their needs and deliver practical
+        technology solutions that help their businesses operate more efficiently,
+        securely, and successfully."
+      </blockquote>
+      <p class="text-ink/65 text-sm leading-relaxed">
+        No account manager, no rotating help desk. When you call Cohesive IT, you reach
+        Craig, the person who knows your systems, with an exceptional response time and
+        the ability to be on-site in person when it matters.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING TEASER -->
+<section class="py-24 md:py-28 px-6">
+  <div class="max-w-3xl mx-auto text-center">
+    <p class="font-mono text-[11px] uppercase tracking-[0.2em] text-moss mb-5">Simple, Predictable Costs</p>
+    <h2 class="font-display font-semibold text-3xl md:text-5xl leading-tight tracking-tight mb-6">
+      One monthly fee, scoped to your business.
+    </h2>
+    <p class="text-ink/70 text-sm md:text-base leading-relaxed max-w-xl mx-auto">
+      Every business runs on something different, so there's no generic package to
+      quote. Book a consultation and we'll agree a clear, fixed monthly service fee
+      together, scoped to what your business actually needs, negotiated up front, no
+      surprise invoices.
+    </p>
+    <a href="#contact" class="mt-9 inline-flex items-center gap-2 bg-forest text-paper text-sm font-medium px-8 py-3.5 rounded-full hover:bg-ink active:scale-[0.97] transition-[background-color,transform] duration-300">
+      Book a consultation
+    </a>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="bg-forest text-paper py-24 md:py-32 px-6">
+  <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 md:gap-20">
+    <div>
+      <p class="font-mono text-[11px] uppercase tracking-[0.2em] text-sage mb-5">Get In Touch</p>
+      <h2 class="font-display font-semibold text-3xl md:text-5xl leading-tight tracking-tight mb-6">
+        Let's take IT off your plate.
+      </h2>
+      <p class="text-paper/70 text-sm md:text-base leading-relaxed max-w-md">
+        Tell us a bit about your business and Craig will get back to you directly,
+        no call centre, no ticket number.
+      </p>
+
+      <div class="mt-12 space-y-6 text-sm">
+        <div>
+          <p class="text-paper/50 uppercase tracking-[0.15em] text-[11px] mb-1">Location</p>
+          <p>Central Otago, New Zealand</p>
+        </div>
+        <div>
+          <p class="text-paper/50 uppercase tracking-[0.15em] text-[11px] mb-1">Hours</p>
+          <p>Mon - Fri, 8:30am - 5:00pm</p>
+        </div>
+      </div>
+    </div>
+
+    <form id="enquiry-form" class="space-y-8">
+      <div>
+        <label for="name" class="block text-[11px] uppercase tracking-[0.15em] text-paper/60 mb-2">Full Name</label>
+        <input type="text" id="name" name="from_name" required class="input-line w-full py-2 text-paper placeholder:text-paper/30 bg-transparent" placeholder="Jane Smith" style="border-bottom-color: rgba(250,248,243,0.25)">
+      </div>
+      <div>
+        <label for="email" class="block text-[11px] uppercase tracking-[0.15em] text-paper/60 mb-2">Email</label>
+        <input type="email" id="email" name="from_email" required class="input-line w-full py-2 text-paper placeholder:text-paper/30 bg-transparent" placeholder="jane@business.co.nz" style="border-bottom-color: rgba(250,248,243,0.25)">
+      </div>
+      <div>
+        <label for="message" class="block text-[11px] uppercase tracking-[0.15em] text-paper/60 mb-2">Message</label>
+        <textarea id="message" name="message" rows="3" required class="input-line w-full py-2 text-paper placeholder:text-paper/30 resize-none bg-transparent" placeholder="Tell us a bit about your business and what's not working right now..." style="border-bottom-color: rgba(250,248,243,0.25)"></textarea>
+      </div>
+      <div>
+        <button type="submit" class="w-full sm:w-auto px-10 bg-paper text-forest text-sm font-medium py-3.5 rounded-full hover:bg-mist active:scale-[0.98] transition-[background-color,transform] duration-300">
+          Send Message
+        </button>
+        <p id="form-note" class="text-paper/50 text-xs mt-4 leading-relaxed"><!-- TODO: wire to email delivery (EmailJS/backend) --></p>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-ink text-paper py-14 px-6">
+  <div class="max-w-7xl mx-auto flex flex-col md:flex-row md:justify-between gap-10">
+    <div class="text-left space-y-3">
+      <div class="flex items-center gap-3">
+        <img src="assets/cohesive-icon.png" alt="" class="w-6 h-6" aria-hidden="true">
+        <span class="font-display font-semibold text-base">Cohesive IT</span>
+      </div>
+      <p class="text-paper/50 text-sm max-w-xs">Managed IT &amp; cybersecurity for small and medium businesses in Central Otago.</p>
+    </div>
+    <div class="text-left md:text-right space-y-3 text-sm text-paper/60">
+      <a href="#services" class="block hover:text-paper active:text-paper/60 transition-colors duration-300">Services</a>
+      <a href="#approach" class="block hover:text-paper active:text-paper/60 transition-colors duration-300">Approach</a>
+      <a href="#about" class="block hover:text-paper active:text-paper/60 transition-colors duration-300">About</a>
+      <a href="#contact" class="block hover:text-paper active:text-paper/60 transition-colors duration-300">Contact</a>
+    </div>
+  </div>
+  <div class="max-w-7xl mx-auto border-t border-paper/10 mt-10 pt-6 flex flex-col sm:flex-row justify-between gap-3 text-[11px] text-paper/40">
+    <p>&copy; 2026 Cohesive IT Solutions.</p>
+    <p>Central Otago, New Zealand</p>
+  </div>
+</footer>
+
+<script>
+  // nav solid-on-scroll
+  const siteNav = document.getElementById('site-nav');
+  const onScroll = () => {
+    if (window.scrollY > 60) {
+      siteNav.classList.add('bg-paper/95', 'backdrop-blur', 'shadow-sm');
+    } else {
+      siteNav.classList.remove('bg-paper/95', 'backdrop-blur', 'shadow-sm');
+    }
+  };
+  window.addEventListener('scroll', onScroll);
+  onScroll();
+
+  // mobile menu toggle
+  const menuToggle = document.getElementById('menu-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+  menuToggle.addEventListener('click', () => {
+    const isOpen = mobileMenu.classList.toggle('hidden') === false;
+    menuToggle.setAttribute('aria-expanded', String(isOpen));
+  });
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    mobileMenu.classList.add('hidden');
+    menuToggle.setAttribute('aria-expanded', 'false');
+  }));
+
+  // contact form (UI only until real email delivery is wired up - see TODO comment near the form)
+  const enquiryForm = document.getElementById('enquiry-form');
+  const formNote = document.getElementById('form-note');
+  enquiryForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    formNote.textContent = 'Thanks, your message has been sent. Craig will get back to you directly.';
+    enquiryForm.reset();
+  });
+</script>
+
+</body>
+</html>
