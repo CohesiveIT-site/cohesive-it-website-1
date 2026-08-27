@@ -12,6 +12,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@500&amp;display=swap" rel="stylesheet">
 
 <script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
   tailwind.config = {
     theme: {
@@ -421,45 +422,51 @@
 
 <!-- CONTACT -->
 <section id="contact" class="bg-forest text-paper py-24 md:py-32 px-6">
-  <div class="max-w-2xl mx-auto text-center">
-    <p class="font-mono text-[11px] uppercase tracking-[0.2em] text-sage mb-5">Get In Touch</p>
-    <h2 class="font-display font-semibold text-3xl md:text-5xl leading-tight tracking-tight mb-6">
-      Let's take IT off your plate.
-    </h2>
-    <p class="text-paper/70 text-sm md:text-base leading-relaxed max-w-md mx-auto">
-      Tell us a bit about your business and Craig will get back to you directly,
-      no call centre, no ticket number.
-    </p>
+  <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 md:gap-20">
+    <div>
+      <p class="font-mono text-[11px] uppercase tracking-[0.2em] text-sage mb-5">Get In Touch</p>
+      <h2 class="font-display font-semibold text-3xl md:text-5xl leading-tight tracking-tight mb-6">
+        Let's take IT off your plate.
+      </h2>
+      <p class="text-paper/70 text-sm md:text-base leading-relaxed max-w-md">
+        Tell us a bit about your business and Craig will get back to you directly,
+        no call centre, no ticket number.
+      </p>
 
-    <div class="mt-12 flex flex-wrap items-center justify-center gap-x-12 gap-y-6 text-sm">
-      <div>
-        <p class="text-paper/50 uppercase tracking-[0.15em] text-[11px] mb-1">Location</p>
-        <p>Central Otago, New Zealand</p>
-      </div>
-      <div>
-        <p class="text-paper/50 uppercase tracking-[0.15em] text-[11px] mb-1">Hours</p>
-        <p>Mon - Fri, 8:30am - 5:00pm</p>
+      <div class="mt-12 space-y-6 text-sm">
+        <div>
+          <p class="text-paper/50 uppercase tracking-[0.15em] text-[11px] mb-1">Location</p>
+          <p>Central Otago, New Zealand</p>
+        </div>
+        <div>
+          <p class="text-paper/50 uppercase tracking-[0.15em] text-[11px] mb-1">Hours</p>
+          <p>Mon - Fri, 8:30am - 5:00pm</p>
+        </div>
       </div>
     </div>
+
+    <form id="enquiry-form" class="space-y-8">
+      <div>
+        <label for="name" class="block text-[11px] uppercase tracking-[0.15em] text-paper/60 mb-2">Full Name</label>
+        <input type="text" id="name" name="from_name" required class="input-line w-full py-2 text-paper placeholder:text-paper/30 bg-transparent" placeholder="Jane Smith" style="border-bottom-color: rgba(250,248,243,0.25)">
+      </div>
+      <div>
+        <label for="email" class="block text-[11px] uppercase tracking-[0.15em] text-paper/60 mb-2">Email</label>
+        <input type="email" id="email" name="from_email" required class="input-line w-full py-2 text-paper placeholder:text-paper/30 bg-transparent" placeholder="jane@business.co.nz" style="border-bottom-color: rgba(250,248,243,0.25)">
+      </div>
+      <div>
+        <label for="message" class="block text-[11px] uppercase tracking-[0.15em] text-paper/60 mb-2">Message</label>
+        <textarea id="message" name="message" rows="3" required class="input-line w-full py-2 text-paper placeholder:text-paper/30 resize-none bg-transparent" placeholder="Tell us a bit about your business and what's not working right now..." style="border-bottom-color: rgba(250,248,243,0.25)"></textarea>
+      </div>
+      <div>
+        <button type="submit" class="w-full sm:w-auto px-10 bg-paper text-forest text-sm font-medium py-3.5 rounded-full hover:bg-mist active:scale-[0.98] transition-[background-color,transform] duration-300">
+          Send Message
+        </button>
+        <p id="form-note" class="text-paper/50 text-xs mt-4 leading-relaxed"><!-- TODO: replace the EmailJS placeholder IDs below with real ones from an EmailJS account connected to website@cohesiveit.co.nz --></p>
+      </div>
+    </form>
   </div>
 </section>
-
-<!--
-  WEBADOR FORM GOES HERE: this project uses Webador's own native form widget for
-  contact submissions (forwarded to website@cohesiveit.co.nz via Webador's built-in
-  form settings) rather than a custom-coded form, so there's nothing to wire up in
-  code. When assembling the page in Webador, drop the native Form widget in this
-  spot, as its own section between the Contact section above and the footer below.
-  See webador-bundle/README.md for the exact steps.
-  The box below is a placeholder so the page looks complete when previewed on its
-  own; delete it once the real form widget is in place.
--->
-<div class="bg-forest px-6 pb-24 md:pb-32">
-  <div class="max-w-xl mx-auto rounded-3xl border-2 border-dashed border-paper/25 flex flex-col items-center justify-center text-center px-8 py-14">
-    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="mb-4 opacity-60"><path d="M4 5H20V17H4V5Z" stroke="#FAF8F3" stroke-width="1.6" stroke-linejoin="round"/><path d="M4 6L12 12L20 6" stroke="#FAF8F3" stroke-width="1.6" stroke-linejoin="round"/></svg>
-    <p class="text-paper/60 text-sm max-w-[260px]">Webador's native contact form goes here, forwarded to website@cohesiveit.co.nz</p>
-  </div>
-</div>
 
 <!-- FOOTER -->
 <footer class="bg-ink text-paper py-14 px-6">
@@ -508,6 +515,33 @@
     mobileMenu.classList.add('hidden');
     menuToggle.setAttribute('aria-expanded', 'false');
   }));
+
+  // form submit via EmailJS - see the TODO comment near the form for setup steps
+  emailjs.init({ publicKey: 'REPLACE_WITH_EMAILJS_PUBLIC_KEY' });
+
+  const enquiryForm = document.getElementById('enquiry-form');
+  const formNote = document.getElementById('form-note');
+  const submitBtn = enquiryForm.querySelector('button[type="submit"]');
+
+  enquiryForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    submitBtn.disabled = true;
+    submitBtn.classList.add('opacity-50');
+    formNote.textContent = 'Sending...';
+
+    emailjs.sendForm('REPLACE_WITH_EMAILJS_SERVICE_ID', 'REPLACE_WITH_EMAILJS_TEMPLATE_ID', enquiryForm)
+      .then(() => {
+        formNote.textContent = 'Thanks, your message has been sent. Craig will get back to you directly.';
+        enquiryForm.reset();
+      })
+      .catch(() => {
+        formNote.textContent = 'Sorry, something went wrong sending your message. Please email website@cohesiveit.co.nz directly.';
+      })
+      .finally(() => {
+        submitBtn.disabled = false;
+        submitBtn.classList.remove('opacity-50');
+      });
+  });
 </script>
 
 </body>
