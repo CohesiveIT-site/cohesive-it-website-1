@@ -97,6 +97,12 @@
     transition: border-color .3s ease;
   }
   .input-line:focus { border-color: #1B3A2A; }
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  .animate-marquee { animation: marquee 42s linear infinite; }
 </style>
 </head>
 
@@ -384,6 +390,67 @@
         <li class="flex gap-3"><span class="text-sage mt-0.5">&#10003;</span>No recruitment, no onboarding, no single point of failure</li>
         <li class="flex gap-3"><span class="text-sage mt-0.5">&#10003;</span>A proactive, security-first standard applied from day one</li>
       </ul>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIAL -->
+<section class="bg-forest text-paper py-24 md:py-32 px-6 overflow-hidden">
+  <div class="max-w-3xl mx-auto text-center mb-14">
+    <p class="font-mono text-[11px] uppercase tracking-[0.2em] text-sage mb-5">What Our Clients Say</p>
+    <h2 class="font-display font-semibold text-3xl md:text-5xl leading-tight tracking-tight">
+      Real feedback from a real client.
+    </h2>
+  </div>
+
+  <div class="max-w-3xl mx-auto relative px-2">
+    <span class="absolute -top-8 -left-1 md:-left-6 font-display text-[90px] md:text-[130px] leading-none text-paper/10 select-none" aria-hidden="true">&ldquo;</span>
+    <blockquote class="relative text-paper/85 text-base md:text-lg leading-relaxed space-y-5">
+      <p>When Craig Blair started Cohesive IT, continuing to work with him was an easy decision for us. Craig had been our IT support through our previous provider, so he already knew our businesses, our systems and our operational requirements extremely well. We had developed an excellent working relationship with him over the years, and when he established Cohesive IT, it was a no-brainer for us to follow him into his new business.</p>
+      <p>Cohesive IT now provides managed IT services across all our New Zealand businesses, including Hampton Downs Motorsport Park, Highlands Motorsport Park, Taup&#333; International Motorsport Park and Repco NextGen NZ Championship.</p>
+      <p>The fixed-fee managed IT service gives us certainty around our IT costs and makes budgeting much easier. We have access to 24/7 network and systems monitoring, helpdesk support, security management, and backup and disaster recovery services, giving us confidence that our systems are being proactively managed and protected.</p>
+      <p>What we particularly value is that Cohesive IT takes the time to understand our business and works with us on our longer-term goals, rather than simply responding when something goes wrong. Craig is always accessible, helpful and willing to find practical solutions when we need them.</p>
+      <p>We have a high level of trust in the Cohesive IT team and would have no hesitation in recommending their services.</p>
+    </blockquote>
+    <p class="mt-8 pt-6 border-t border-paper/15 text-paper/60 text-sm uppercase tracking-[0.1em]">
+      A Cohesive IT Client
+    </p>
+  </div>
+
+  <div class="mt-16 max-w-full">
+    <div class="flex whitespace-nowrap animate-marquee">
+      <div class="flex items-center gap-4 pr-4 shrink-0">
+        <span class="text-paper/50 text-sm uppercase tracking-[0.15em]">Hampton Downs Motorsport Park</span>
+        <span class="text-sage/60" aria-hidden="true">&bull;</span>
+        <span class="text-paper/50 text-sm uppercase tracking-[0.15em]">Highlands Motorsport Park</span>
+        <span class="text-sage/60" aria-hidden="true">&bull;</span>
+        <span class="text-paper/50 text-sm uppercase tracking-[0.15em]">Taup&#333; International Motorsport Park</span>
+        <span class="text-sage/60" aria-hidden="true">&bull;</span>
+        <span class="text-paper/50 text-sm uppercase tracking-[0.15em]">Repco NextGen NZ Championship</span>
+        <span class="text-sage/60" aria-hidden="true">&bull;</span>
+        <span class="text-paper/50 text-sm uppercase tracking-[0.15em]">New Zealand Cherry Corp</span>
+        <span class="text-sage/60" aria-hidden="true">&bull;</span>
+        <span class="text-paper/50 text-sm uppercase tracking-[0.15em]">Landpro NZ</span>
+        <span class="text-sage/60" aria-hidden="true">&bull;</span>
+        <span class="text-paper/50 text-sm uppercase tracking-[0.15em]">Advantage Plumbing</span>
+        <span class="text-sage/60" aria-hidden="true">&bull;</span>
+      </div>
+      <div class="flex items-center gap-4 pr-4 shrink-0" aria-hidden="true">
+        <span class="text-paper/50 text-sm uppercase tracking-[0.15em]">Hampton Downs Motorsport Park</span>
+        <span class="text-sage/60">&bull;</span>
+        <span class="text-paper/50 text-sm uppercase tracking-[0.15em]">Highlands Motorsport Park</span>
+        <span class="text-sage/60">&bull;</span>
+        <span class="text-paper/50 text-sm uppercase tracking-[0.15em]">Taup&#333; International Motorsport Park</span>
+        <span class="text-sage/60">&bull;</span>
+        <span class="text-paper/50 text-sm uppercase tracking-[0.15em]">Repco NextGen NZ Championship</span>
+        <span class="text-sage/60">&bull;</span>
+        <span class="text-paper/50 text-sm uppercase tracking-[0.15em]">New Zealand Cherry Corp</span>
+        <span class="text-sage/60">&bull;</span>
+        <span class="text-paper/50 text-sm uppercase tracking-[0.15em]">Landpro NZ</span>
+        <span class="text-sage/60">&bull;</span>
+        <span class="text-paper/50 text-sm uppercase tracking-[0.15em]">Advantage Plumbing</span>
+        <span class="text-sage/60">&bull;</span>
+      </div>
     </div>
   </div>
 </section>
